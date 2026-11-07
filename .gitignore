@@ -1,0 +1,58 @@
+# Python bytecode and local caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Notebook/editor/system noise
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+__MACOSX/
+
+# Local experiment outputs
+pretrain_checkpoints/
+lib_edge_splits/
+lib_ehnn_cache/
+pretrain_logs/
+fewshot_logs/
+runs/
+wandb/
+outputs/
+logs/
+
+# Model checkpoints and processed artifacts
+pretrained/
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pickle
+*.npy
+*.npz
+
+# Datasets and large generated folders
+data/*
+!data/README.md
+raw/
+processed/
+
+# Environment files
+.env
+.venv/
+venv/
+.conda/
+
+# Experiment results and generated figures
+results/
+figures/
+figures_*/
+
+# Local agent configuration and release archives
+.agents/
+.codex/
+.aws/
+HMTL-github*.zip

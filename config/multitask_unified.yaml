@@ -1,0 +1,41 @@
+node_dataset: coauthor_cora
+edge_dataset: coauthor_cora
+graph_dataset: RHG_10  
+tasks: node_cls,edge_pred,hg_cls
+device: cuda:0
+encoder: HGNN
+
+epochs: 100
+runs: 5
+seed: 0
+lr: 0.001
+weight_decay: 0
+hidden_dim: 128
+num_layers: 2
+dropout: 0.2
+feature_dim: 128
+eval_every: 100
+
+adapter_hidden: 32
+adapter_dropout: 0.1
+adapter_scale: 0.1
+temperature: 0.5
+
+node_batch_size: 1000000
+edge_batch_size: 1000000
+graph_batch_size: 1000000
+
+context_hops: 1
+max_hyperedges: 8
+negative_sampling: mixed
+edge_pooling: maxmin
+graph_pooling: max
+
+node_weight: 1.0
+edge_weight: 1.0
+graph_weight: 1.0
+
+train_ratio: 0.6
+val_ratio: 0.2
+steps_per_epoch: 0
+edge_save_dir:
