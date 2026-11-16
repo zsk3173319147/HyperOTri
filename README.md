@@ -6,7 +6,6 @@
 - `edge_pred`：超边预测。
 - `hg_cls`：超图分类。
 
-此版本保留主方法及其运行依赖，移除了消融、调参、画图脚本和历史实验结果。现有 Python 文件和主配置保持原样，入口及文件名沿用原项目。
 
 ## 项目结构
 
@@ -30,8 +29,6 @@ HMTL/
     └── README.md                  # 数据准备说明；数据文件另行准备
 ```
 
-`tests/` 中的两个文件是原项目沿用的运行入口与依赖，不是 pytest 单元测试。主方法仍会导入 `main.py` 和 `test_multitask.py`，因此保留其完整依赖模块。
-
 ## 安装
 
 本次运行验证使用 Linux、Python 3.9.25、PyTorch 2.5.1（CUDA 12.4 构建）和 PyG 2.6.1。依赖版本列在 `requirements.txt` 中。
@@ -50,16 +47,6 @@ python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/
 python -m pip install --only-binary=:all: torch-scatter==2.1.2 torch-sparse==0.6.18 -f https://data.pyg.org/whl/torch-2.5.0+cu124.html
 python -m pip install -r requirements.txt
 ```
-
-仅使用 CPU 时：
-
-```bash
-python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
-python -m pip install --only-binary=:all: torch-scatter==2.1.2 torch-sparse==0.6.18 -f https://data.pyg.org/whl/torch-2.5.0+cpu.html
-python -m pip install -r requirements.txt
-```
-
-PyG 的扩展包需要匹配 PyTorch 和 CUDA 构建；PyTorch 2.5.x 对应的扩展 wheel 索引使用 `torch-2.5.0`。安装命令依据 [PyTorch 历史版本说明](https://pytorch.org/get-started/previous-versions/) 和 [PyG 安装说明](https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html)。
 
 ## 数据准备
 
@@ -95,8 +82,3 @@ python tests/test_multitask_unified.py \
 python tests/test_multitask_unified.py --help
 ```
 
-任务数据集、设备、训练轮数和模型维度等可从命令行覆盖。子超图参数、batch 大小、数据划分比例和超边缓存路径等从 YAML 配置读取。
-
-当前训练器要求各任务的训练 batch 数一致。原配置将三个任务的 batch 大小设为 `1000000`，用于当前数据规模下的整批训练；调整 batch 大小时需满足这一要求。
-
-运行会输出节点和超图分类的 Accuracy、Macro-F1，以及超边预测的 AUROC、AP、Accuracy。默认输出到终端，超边划分和 PyG 缓存保存在 `data/` 下。
